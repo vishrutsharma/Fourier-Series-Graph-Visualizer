@@ -28,7 +28,7 @@ bool Application::initialize()
 
     m_function.frequency = 4.5f;
     m_function.amplitude = 1.0f;
-    m_function.funcType = CC_Graph::WaveFunctionType::SIN;
+    m_function.funcType = CC_Graph::HarmonicsType::SIN;
     return true;
 }
 

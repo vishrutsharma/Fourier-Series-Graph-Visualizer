@@ -5,7 +5,7 @@
 
 namespace CC_Graph
 {
-    enum class WaveFunctionType
+    enum class HarmonicsType
     {
         NONE,
         SIN,
@@ -13,9 +13,9 @@ namespace CC_Graph
         TAN
     };
 
-    struct WaveFunction
+    struct Harmonics
     {
-        WaveFunctionType funcType = WaveFunctionType::NONE;
+        HarmonicsType funcType = HarmonicsType::NONE;
 
         float amplitude;
         float frequency;
@@ -27,11 +27,11 @@ namespace CC_Graph
             float elapsedTime = TimeManager::GetInstance().GetTotalTime();
             switch (funcType)
             {
-            case WaveFunctionType::SIN:
+            case HarmonicsType::SIN:
                 return amplitude * std::sin(frequency * x + phase + elapsedTime) + offset;
-            case WaveFunctionType::COS:
+            case HarmonicsType::COS:
                 return amplitude * std::cos(frequency * x + phase + elapsedTime) + offset;
-            case WaveFunctionType::TAN:
+            case HarmonicsType::TAN:
                 return amplitude * std::tan(frequency * x + phase + elapsedTime) + offset;
             default:
                 return 0.0f;

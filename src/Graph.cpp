@@ -72,7 +72,7 @@ void Graph::drawAxes(SDL_Renderer *renderer, int width, int height) const
     SDL_RenderDrawLineF(renderer, m_originX, 0, m_originX, static_cast<float>(height));
 }
 
-void Graph::drawGraph(SDL_Renderer *renderer, int width, CC_Graph::WaveFunction &function) const
+void Graph::drawGraph(SDL_Renderer *renderer, int width, CC_Graph::Harmonics &harmonic) const
 {
     SDL_SetRenderDrawColor(renderer, 0, 220, 150, 255);
 
@@ -82,7 +82,7 @@ void Graph::drawGraph(SDL_Renderer *renderer, int width, CC_Graph::WaveFunction 
     for (int pixelX = 0; pixelX < width; ++pixelX)
     {
         SDL_FPoint mathPoint = toMath(static_cast<float>(pixelX), 0);
-        float y = function.Draw(mathPoint.x);
+        float y = harmonic.Draw(mathPoint.x);
         SDL_FPoint current = toScreen(mathPoint.x, y);
 
         if (hasPrevious)

@@ -24,7 +24,7 @@ public:
         int height) const;
 
     void drawGraph(
-        SDL_Renderer *renderer, int width, CC_Graph::WaveFunction &function) const;
+        SDL_Renderer *renderer, int width, CC_Graph::Harmonics &function) const;
 
 private:
     float m_originX;
