@@ -1,5 +1,8 @@
 #pragma once
 #include <SDL2/SDL.h>
+#include <functional>
+#include <memory>
+#include <vector>
 #include "CoreComponents.h"
 
 class Graph
@@ -23,8 +26,20 @@ public:
         int width,
         int height) const;
 
+    // Draws a single harmonic in its own color.
     void drawGraph(
-        SDL_Renderer *renderer, int width, CC_Graph::Harmonics &function) const;
+        SDL_Renderer *renderer, int width, const CC_Graph::Harmonics &harmonic) const;
+
+    // Draws the sum of all harmonics (the composed wave) in the given color.
+    void drawSum(
+        SDL_Renderer *renderer, int width,
+        const std::vector<std::unique_ptr<CC_Graph::Harmonics>> &harmonics,
+        SDL_Color color) const;
+
+    // Draws any y = f(x) function in the given color.
+    void drawFunction(
+        SDL_Renderer *renderer, int width,
+        const std::function<float(float)> &function, SDL_Color color) const;
 
 private:
     float m_originX;

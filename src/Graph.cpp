@@ -72,9 +72,39 @@ void Graph::drawAxes(SDL_Renderer *renderer, int width, int height) const
     SDL_RenderDrawLineF(renderer, m_originX, 0, m_originX, static_cast<float>(height));
 }
 
-void Graph::drawGraph(SDL_Renderer *renderer, int width, CC_Graph::Harmonics &harmonic) const
+void Graph::drawGraph(SDL_Renderer *renderer, int width, const CC_Graph::Harmonics &harmonic) const
 {
-    SDL_SetRenderDrawColor(renderer, 0, 220, 150, 255);
+    drawFunction(
+        renderer, width,
+        [&harmonic](float x)
+        { return harmonic.Draw(x); },
+        harmonic.color);
+}
+
+void Graph::drawSum(
+    SDL_Renderer *renderer, int width,
+    const std::vector<std::unique_ptr<CC_Graph::Harmonics>> &harmonics,
+    SDL_Color color) const
+{
+    drawFunction(
+        renderer, width,
+        [&harmonics](float x)
+        {
+            float sum = 0.0f;
+            for (const auto &harmonic : harmonics)
+            {
+                sum += harmonic->Draw(x);
+            }
+            return sum;
+        },
+        color);
+}
+
+void Graph::drawFunction(
+    SDL_Renderer *renderer, int width,
+    const std::function<float(float)> &function, SDL_Color color) const
+{
+    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
 
     SDL_FPoint previous{};
     bool hasPrevious = false;
@@ -82,7 +112,7 @@ void Graph::drawGraph(SDL_Renderer *renderer, int width, CC_Graph::Harmonics &ha
     for (int pixelX = 0; pixelX < width; ++pixelX)
     {
         SDL_FPoint mathPoint = toMath(static_cast<float>(pixelX), 0);
-        float y = harmonic.Draw(mathPoint.x);
+        float y = function(mathPoint.x);
         SDL_FPoint current = toScreen(mathPoint.x, y);
 
         if (hasPrevious)

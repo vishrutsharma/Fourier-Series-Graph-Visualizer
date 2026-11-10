@@ -1,16 +1,20 @@
 #pragma once
 
 #include "CoreComponents.h"
+#include <cstddef>
 #include <vector>
 #include <memory>
-
-using namespace std;
 
 class WaveComposer
 {
 private:
-    vector<unique_ptr<CC_Graph::Harmonics>> m_harmonics;
+    std::vector<std::unique_ptr<CC_Graph::Harmonics>> m_harmonics;
 
 public:
-    void AddHarmonic(unique_ptr<CC_Graph::Harmonics>);
+    void AddHarmonic(std::unique_ptr<CC_Graph::Harmonics> harmonic);
+    void RemoveHarmonic(std::size_t index);
+    void Clear();
+
+    const std::vector<std::unique_ptr<CC_Graph::Harmonics>> &GetHarmonics() const;
+    std::vector<std::unique_ptr<CC_Graph::Harmonics>> &GetHarmonics();
 };

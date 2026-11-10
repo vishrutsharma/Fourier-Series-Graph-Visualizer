@@ -17,12 +17,14 @@ namespace CC_Graph
     {
         HarmonicsType funcType = HarmonicsType::NONE;
 
-        float amplitude;
-        float frequency;
-        float phase;
-        float offset;
+        float amplitude = 1.0f;
+        float frequency = 1.0f;
+        float phase = 0.0f;
+        float offset = 0.0f;
 
-        inline float Draw(float x)
+        SDL_Color color{0, 220, 150, 255};
+
+        inline float Draw(float x) const
         {
             float elapsedTime = TimeManager::GetInstance().GetTotalTime();
             switch (funcType)
