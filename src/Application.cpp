@@ -196,6 +196,27 @@ void Application::renderUI()
     ImGui::Text("FPS: %.1f", TimeManager::GetInstance().GetFPS());
     ImGui::Checkbox("Show sum (white)", &m_showSum);
 
+    // Coordinate system switch: takes effect on the very next frame.
+    int mode = static_cast<int>(m_graph.getMode());
+    ImGui::Text("Coordinates:");
+    ImGui::SameLine();
+    bool modeChanged = ImGui::RadioButton("Cartesian", &mode, static_cast<int>(CC_Graph::CoordinateMode::CARTESIAN));
+    ImGui::SameLine();
+    modeChanged |= ImGui::RadioButton("Polar", &mode, static_cast<int>(CC_Graph::CoordinateMode::POLAR));
+    if (modeChanged)
+    {
+        m_graph.setMode(static_cast<CC_Graph::CoordinateMode>(mode));
+    }
+
+    if (m_graph.getMode() == CC_Graph::CoordinateMode::POLAR)
+    {
+        float turns = m_graph.getPolarTurns();
+        if (ImGui::SliderFloat("Theta turns", &turns, 0.25f, 20.0f, "%.2f x 2pi"))
+        {
+            m_graph.setPolarTurns(turns);
+        }
+    }
+
     if (ImGui::Button("Add Harmonic"))
     {
         createRandomHarmonics(1);

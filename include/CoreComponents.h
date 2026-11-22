@@ -5,6 +5,12 @@
 
 namespace CC_Graph
 {
+    enum class CoordinateMode
+    {
+        CARTESIAN,
+        POLAR
+    };
+
     enum class HarmonicsType
     {
         NONE,
