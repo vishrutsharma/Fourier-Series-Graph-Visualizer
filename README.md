@@ -6,9 +6,9 @@ The goal of this project is to explore mathematical function visualization, grap
 
 The project aims to visualize how individual waves can be combined using Fourier series to approximate more complex periodic signals.
 
-https://github.com/user-attachments/assets/2aeb66d2-1a37-4d1f-8937-05d62917fb11      https://github.com/user-attachments/assets/565fafe5-c00e-4b17-9d9f-cf6247140d5d
+https://github.com/user-attachments/assets/2aeb66d2-1a37-4d1f-8937-05d62917fb11    
 
-
+https://github.com/user-attachments/assets/565fafe5-c00e-4b17-9d9f-cf6247140d5d
 
 ---
 
